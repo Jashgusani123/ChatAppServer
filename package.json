@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-  "start": "SET NODE_ENV=PRODUCTION && node app.js",
-  "dev": "SET NODE_ENV=DEVELOPMENT && nodemon app.js"
-},
+    "start": "SET NODE_ENV=PRODUCTION && node app.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT && nodemon app.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
