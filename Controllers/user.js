@@ -3,7 +3,7 @@ import { User } from "../models/userModels.js";
 import { Chat } from "../models/chat.js";
 import { Request } from "../models/request.js";
 import { cookieOptions, emitEvent, sendToken, uploadFilesToCloudinary } from "../utils/features.js";
-import { compare } from "bcrypt";
+import {compare} from 'bcryptjs';
 import { NewRequest, Refetch_Chats } from "../Constants/Evants.js";
 import {getOtherMembers} from '../lib/helper.js';
 
