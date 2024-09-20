@@ -3,9 +3,10 @@ import { User } from "../models/userModels.js";
 import { Chat } from "../models/chat.js";
 import { Request } from "../models/request.js";
 import { cookieOptions, emitEvent, sendToken, uploadFilesToCloudinary } from "../utils/features.js";
-import {compare} from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import { NewRequest, Refetch_Chats } from "../Constants/Evants.js";
 import {getOtherMembers} from '../lib/helper.js';
+const { compare } = bcrypt; 
 
 // Create a New User and save into DataBase
 const newUser = async (req, res, next) => {
