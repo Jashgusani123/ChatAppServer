@@ -1,7 +1,7 @@
 import express from "express";
-import userRoute from "../Server/routes/userRoutes.js";
-import chatRoute from "../Server/routes/chatRoutes.js";
-import adminRoutes from "../Server/routes/adminRoutes.js";
+import userRoute from "./routes/userRoutes.js";
+import chatRoute from "./routes/chatRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { connectDB } from "./utils/features.js";
