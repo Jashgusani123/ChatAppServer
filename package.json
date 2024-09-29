@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "build":"npm run build",
-    "start": "node app.js",
-    "dev": "NODE_ENV=DEVELOPMENT && node app.js"
-  },
+"scripts": {
+  "build": "echo 'No build step required'", 
+  "start": "node app.js", 
+  "dev": "NODE_ENV=DEVELOPMENT node app.js" },
   "keywords": [],
   "author": "",
   "license": "ISC",
