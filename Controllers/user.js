@@ -13,6 +13,7 @@ const newUser = async (req, res, next) => {
   try {
     const { name, username, password, bio } = req.body;
     const file = req.file;
+    
 
     if(!file)return next(new ErrorHandler("Please Upload Avatar" ,400))
 

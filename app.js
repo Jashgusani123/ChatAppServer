@@ -22,13 +22,13 @@ dotenv.config({
   path: "./.env",
 });
 
-const mongoURL = process.env.MONGO_URL;
-const PORT = process.env.PORT || 3001;
+// const mongoURL = process.env.MONGO_URL;
+const PORT = process.env.PORT || 3000;
 const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
 const adminSecretKey = process.env.SECRETKEY || "jfkdslnedns";
 const userSocketIDs = new Map();
 
-connectDB(mongoURL);
+connectDB();
 cloudinary.config({
   cloud_name: process.env.CLOUDNARY_CLOUD_NAME,
   api_key: process.env.CLOUDNARY_API_KEY,

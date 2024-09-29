@@ -4,10 +4,12 @@ import { v2 as cloudinary } from "cloudinary";
 import { v4 as uuid } from "uuid";
 import { getBase64 } from "../lib/helper.js";
 import { getSockets } from "../lib/helper.js";
-
-export const connectDB = async (mongoURL) => {
+import dotenv from 'dotenv';
+dotenv.config();
+export const connectDB = async () => {
   try {
-    await mongoose.connect(mongoURL);
+    const mongoURI = process.env.MONGO_URL; // Use environment variable for URL
+    await mongoose.connect(mongoURI);
     console.log("MongoDB Connected");
   } catch (err) {
     console.error("Error connecting to MongoDB", err);
@@ -15,18 +17,22 @@ export const connectDB = async (mongoURL) => {
   }
 };
 
+// Cookie options for sending JWT token
 const cookieOptions = {
-  maxAge: 15 * 24 * 60 * 60 * 1000,
-  sameSite: "none",
+  maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
+  sameSite: "None",
   httpOnly: true,
-  secure: true,
+  secure: true, // Use secure cookies in production
 };
+
+// Function to send JWT token
 const sendToken = (res, user, code, message) => {
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
-
+  
   return res.status(code).cookie("ChatApp", token, cookieOptions).json({
     success: true,
     message,
+    user,
   });
 };
 
