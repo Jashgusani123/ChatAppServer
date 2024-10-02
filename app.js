@@ -28,6 +28,7 @@ const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
 const adminSecretKey = process.env.SECRETKEY || "jfkdslnedns";
 const userSocketIDs = new Map();
 const onlineUser = new Set()
+const clienturl = process.env.CLIENT_URL.split(",")
 
 connectDB();
 cloudinary.config({
@@ -39,7 +40,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: [process.env.CLIENT_URL],
+    origin: clienturl,
     credentials: true,
   },
 });
@@ -49,7 +50,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL],
+    origin: clienturl,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
