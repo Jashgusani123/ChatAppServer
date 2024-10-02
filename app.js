@@ -8,7 +8,7 @@ import { connectDB } from "./utils/features.js";
 import { errorMiddlewares } from "./middlewares/error.js";
 import { Server } from "socket.io";
 import { createServer } from "http";
-import { newMessage, NewMessageAlert, StartTyping, StopTyping } from "./Constants/Evants.js";
+import { ChatJoind, ChatLeaved, newMessage, NewMessageAlert, OnlineUsers, StartTyping, StopTyping } from "./Constants/Evants.js";
 import { v4 as uuid } from "uuid";
 import { getSockets } from "./lib/helper.js";
 import { Message } from "./models/message.js";
@@ -27,6 +27,7 @@ const PORT = process.env.PORT || 3000;
 const envMode = process.env.NODE_ENV.trim() || "PRODUCTION";
 const adminSecretKey = process.env.SECRETKEY || "jfkdslnedns";
 const userSocketIDs = new Map();
+const onlineUser = new Set()
 
 connectDB();
 cloudinary.config({
@@ -114,8 +115,26 @@ io.on("connection", (socket) => {
     const membersSockets = getSockets(members);
     socket.to(membersSockets).emit(StopTyping , {chatId})
   })
+
+  socket.on(ChatJoind , ({userId , members})=>{
+    onlineUser.add(userId.toString())
+
+    const membersSockets = getSockets(members)
+
+    io.to(membersSockets).emit(OnlineUsers , Array.from(onlineUser))
+  })
+  socket.on(ChatLeaved , ({userId , members})=>{
+    onlineUser.delete(userId.toString())
+
+    
+    const membersSockets = getSockets(members)
+
+    io.to(membersSockets).emit(OnlineUsers , Array.from(onlineUser))
+  })
   socket.on("disconnect", () => {
     userSocketIDs.delete(user._id.toString());
+    onlineUser.delete(user._id.toString());
+    socket.broadcast.emit(onlineUser , Array.from(onlineUser))
   });
 });
 

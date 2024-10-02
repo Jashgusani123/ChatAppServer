@@ -15,7 +15,7 @@ if(!isMatch) return next(new ErrorHandler("Invalid AdminKey",401))
 
   const token = jwt.sign(secretKey , process.env.JWT_SECRET)
 
-  return res.status(200).cookie("ChatApp_admin_token" , token , {...cookieOptions , maxAge:1000*60*15}).json({
+  return res.status(200).cookie("ChatApp_admin_token" , token , {...cookieOptions }).json({
     success:true ,
     message:"Authentication SuccessFully , WellCome Boss"
   })
@@ -174,6 +174,7 @@ const getDeshBordState = async (req, res, next) => {
     })
 };
 const getAdminData = async(req , res , next)=>{
+  
   return res.status(200).json({
     admin:true
   })

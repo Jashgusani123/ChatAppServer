@@ -23,12 +23,13 @@ const errorMiddlewares = (err, req, res, next) => {
     err.message = `Invalid Formate Of ${errorPath}`;
     err.statusCode = 400;
   }
+  const response = { success: false, message: err.message };
 
-  return res.status(err.statusCode || 500).json({
-    success: false,
-    message: envMode.trim() === "DEVELOPMENT" ? err.message : err.message
+  if(envMode === "DEVELOPMENT"){
+    response.error = err
+  }
 
-  });
+  return res.status(err.statusCode || 500).json(response);
 };
 
 export { errorMiddlewares, ErrorHandler };

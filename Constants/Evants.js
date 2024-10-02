@@ -7,4 +7,22 @@ const newMessage = "newMessage";
 
 const StartTyping = "StartTyping";
 const StopTyping = "StopTyping";
-export {Alert , Refetch_Chats , NewAttachments , StartTyping , StopTyping, NewMessageAlert,NewRequest , newMessage}
+
+const ChatJoind = "ChatJoind";
+const ChatLeaved = "ChatLeaved";
+
+const OnlineUsers = "OnlineUsers";
+
+export {
+  Alert,
+  Refetch_Chats,
+  NewAttachments,
+  OnlineUsers,
+  StartTyping,
+  StopTyping,
+  NewMessageAlert,
+  NewRequest,
+  newMessage,
+  ChatJoind,
+  ChatLeaved,
+};

@@ -22,9 +22,11 @@ const isAuthenticated = async (req, res, next) => {
 const adminOnlyAuthentication = async (req, res, next) => {
   try {
     const token = req.cookies["ChatApp_admin_token"];
+    console.log(req.cookies["ChatApp_admin_token"])
     if (!token) {
       return next(new ErrorHandler("Only Admin can access this routes", 401));
     }
+
     const secretKey = jwt.verify(token, process.env.JWT_SECRET);
     const isMatch = secretKey === adminSecretKey;
 
@@ -33,7 +35,6 @@ const adminOnlyAuthentication = async (req, res, next) => {
     next();
   } catch (err) {
     console.log(err);
-
     next(err);
   }
 };

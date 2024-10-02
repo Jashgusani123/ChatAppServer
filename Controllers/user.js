@@ -80,7 +80,8 @@ const logout = async (req, res ,next) => {
 };
 
 const searchUser = async (req, res) => {
-  try{const { name = "" } = req.query;
+  const { name = "" } = req.query;
+  try{
 
   const myChats = await Chat.find({ groupChat: false, members: req.id });
 
